@@ -1,182 +1,789 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Arman Qureshi | Social Growth & Crypto Stats</title>
-<style>
-html, body { margin:0; padding:0; font-family:Arial, sans-serif; background:#000; color:white; overflow-x:hidden; }
-canvas { position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; }
-
-/* Header */
-header { text-align:center; padding:30px 0; }
-h1 { font-size:48px; margin:0; }
-.subtitle { margin:6px 0; opacity:0.8; font-size:18px; }
-.btn { margin:6px; padding:10px 18px; border-radius:30px; text-decoration:none; font-weight:bold; display:inline-block; transition:0.3s; }
-.btn:hover { transform:scale(1.1); }
-.whatsapp {background:#25D366;color:#000;}
-.instagram {background:#E1306C;color:#fff;}
-.facebook {background:#1877F2;color:#fff;}
-.snapchat {background:#FFFC00;color:#000;}
-.twitter {background:#1DA1F2;color:#fff;}
-.telegram {background:#0088cc;color:#fff;}
-.trade {background:#FFD700;color:#000;}
-
-/* Cards */
-.section { padding:30px 20px; text-align:center; }
-.cards { display:flex; flex-wrap:wrap; justify-content:center; gap:16px; }
-.card {
-  background:rgba(255,255,255,0.05); backdrop-filter:blur(12px);
-  width:220px; padding:16px; border-radius:12px;
-  box-shadow:0 0 15px rgba(0,255,0,0.4); transition:0.3s;
-}
-.card:hover { transform:scale(1.05); box-shadow:0 0 25px rgba(0,255,0,0.7); }
-.card h3 { font-size:1.1rem; margin-bottom:8px; color:#a8c7ff; }
-.value { font-size:28px; color:#FFD700; margin:8px 0; }
-.order { background:#25D366; color:#000; padding:8px 14px; border-radius:20px; text-decoration:none; display:inline-block; margin-top:6px; }
-
-/* QR */
-.qr img { width:150px; height:150px; }
-
-/* Footer */
-footer { font-size:14px; opacity:0.6; margin:20px 0; }
-
-/* Responsive */
-@media (max-width:700px){ .card{width:90%;} .btn{margin:4px 2px;} }
-</style>
-</head>
-<body>
-
-<canvas id="bg"></canvas>
-
-<header>
-  <h1>Arman Qureshi</h1>
-  <div class="subtitle">Instagram Followers • Views • Crypto • Live Stats</div>
-  <div>
-    <a class="btn whatsapp" href="https://wa.me/9026550240">WhatsApp</a>
-    <a class="btn instagram" href="https://www.instagram.com/armanqureshi2800">Instagram</a>
-    <a class="btn facebook" href="https://www.facebook.com/share/19pPMX9SMV/">Facebook</a>
-    <a class="btn snapchat" href="https://www.snapchat.com/add/armanqureshi_28">Snapchat</a>
-    <a class="btn twitter" href="https://twitter.com/ArmanQureshi280">Twitter</a>
-    <a class="btn telegram" href="https://t.me/Armanqureshi2800">Telegram</a>
-    <a class="btn trade" href="https://www.deribit.com/futures/BTC-PERPETUAL" target="_blank">Trade BTC</a>
-  </div>
-</header>
-
-<section class="section">
-  <h2>Live Stats</h2>
-  <div class="cards">
-
-    <div class="card">
-      <h3>Followers Delivered</h3>
-      <div class="value" id="followersCounter">0</div>
-    </div>
-
-    <div class="card">
-      <h3>Views Delivered</h3>
-      <div class="value" id="viewsCounter">0</div>
-    </div>
-
-    <div class="card">
-      <h3>Bitcoin Price (INR)</h3>
-      <div class="value" id="btcPrice">Loading...</div>
-    </div>
-
-    <div class="card">
-      <h3>Gold 24K Price (INR)</h3>
-      <div class="value" id="goldPrice">Loading...</div>
-    </div>
-
-    <div class="card">
-      <h3>Trade BTC</h3>
-      <div class="value" id="tradeBtcPrice">Loading...</div>
-      <a class="order trade" href="https://www.deribit.com/futures/BTC-PERPETUAL" target="_blank">Trade</a>
-    </div>
-
-  </div>
-</section>
-
-<section class="section">
-  <h2>Instagram Followers Packages</h2>
-  <div class="cards">
-    <div class="card"><h3>1K Followers</h3><div class="value">₹99</div><a class="order" href="https://wa.me/9026550240?text=I want 1000 followers">Order</a></div>
-    <div class="card"><h3>5K Followers</h3><div class="value">₹399</div><a class="order" href="https://wa.me/9026550240?text=I want 5000 followers">Order</a></div>
-    <div class="card"><h3>10K Followers</h3><div class="value">₹699</div><a class="order" href="https://wa.me/9026550240?text=I want 10000 followers">Order</a></div>
-  </div>
-</section>
-
-<section class="section">
-  <h2>UPI Payment</h2>
-  <div class="cards">
-    <div class="card qr">
-      <h3>Pay via UPI</h3>
-      <p>ID: k4046280-2@OKXIS</p>
-      <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=k4046280-2@OKXIS&pn=Arman&cu=INR" alt="UPI QR">
-    </div>
-  </div>
-</section>
-
-<footer>© 2026 Arman Qureshi</footer>
-
-<script>
-// ===== Counters =====
-let followers = 0, views = 0;
-function updateCounters(){
-  if(followers < 1000000) followers += Math.floor(Math.random()*5000);
-  if(views < 1000000) views += Math.floor(Math.random()*5000);
-  document.getElementById("followersCounter").innerText = followers>=1000000 ? "1M+" : (followers/1000).toFixed(0)+"K+";
-  document.getElementById("viewsCounter").innerText = views>=1000000 ? "1M+" : (views/1000).toFixed(0)+"K+";
-}
-setInterval(updateCounters, 50);
-
-// ===== Date Animation =====
-function updateDate(){ let now=new Date();
-  document.getElementById("dateDay").innerText = now.toLocaleString('en-IN',{weekday:'long', year:'numeric', month:'short', day:'numeric'});
-}
-updateDate(); setInterval(updateDate, 60000);
-
-// ===== Particle Background =====
-const canvas = document.getElementById('bg'), ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-let pArr = [];
-for(let i=0;i<150;i++){pArr.push({x:Math.random()*canvas.width, y:Math.random()*canvas.height, r:Math.random()*3+1, s:Math.random()*0.5+0.2});}
-function animateBg(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  pArr.forEach(p=>{ p.y -= p.s; if(p.y<0) p.y = canvas.height;
-    ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle='rgba(0,255,0,0.7)'; ctx.fill();
-  });
-  requestAnimationFrame(animateBg);
-}
-animateBg(); window.addEventListener('resize',()=>{canvas.width=innerWidth; canvas.height=innerHeight;});
-
-// ===== Buttons Slide-in =====
-window.addEventListener('load',()=>{
-  document.querySelectorAll('.btn').forEach((b,i)=>{ setTimeout(()=>{b.classList.add('slide-in');}, i*120);});
-});
-
-// ===== BTC Live Price =====
-async function getBTC(){
-  try{
-    let res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=inr');
-    let d = await res.json();
-    let p = d.bitcoin.inr;
-    document.getElementById('btcPrice').innerText = '₹'+p.toLocaleString();
-    document.getElementById('tradeBtcPrice').innerText = '₹'+p.toLocaleString();
-  }catch{ document.getElementById('btcPrice').innerText='Error'; }
-}
-getBTC(); setInterval(getBTC, 60000);
-
-// ===== Gold 24K Live Price (replace with real API) =====
-async function getGold(){
-  try{
-    let res = await fetch('https://api.example.com/gold24k?apikey=YOUR_GOLD_API_KEY');
-    let d = await res.json();
-    document.getElementById('goldPrice').innerText = '₹'+d.price.toLocaleString();
-  }catch{ document.getElementById('goldPrice').innerText='Error'; }
-}
-getGold(); setInterval(getGold, 60000);
-
-</script>
-
-</body>
-</html>
+यहाँ आपका पूरा HTML code है:
+Action: file_editor view /app/arman-website.html
+Observation: [Showing lines 1-785 of 785 total] /app/arman-website.html:
+1|<!DOCTYPE html>
+2|<html lang="en">
+3|<head>
+4|<meta charset="UTF-8">
+5|<meta name="viewport" content="width=device-width, initial-scale=1.0">
+6|<title>Arman Qureshi | Instagram Followers • Views • Crypto</title>
+7|<style>
+8|* { margin: 0; padding: 0; box-sizing: border-box; }
+9|
+10|html, body {
+11|  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+12|  background: linear-gradient(135deg, #0f172a 0%, #1e3a20 50%, #0f172a 100%);
+13|  color: white;
+14|  overflow-x: hidden;
+15|  min-height: 100vh;
+16|  position: relative;
+17|}
+18|
+19|/* Particle Canvas */
+20|#particles {
+21|  position: fixed;
+22|  top: 0; left: 0;
+23|  width: 100%; height: 100%;
+24|  z-index: 0;
+25|  pointer-events: none;
+26|}
+27|
+28|/* Container */
+29|.container {
+30|  position: relative;
+31|  z-index: 1;
+32|  max-width: 1400px;
+33|  margin: 0 auto;
+34|  padding: 20px;
+35|}
+36|
+37|/* Header */
+38|header {
+39|  text-align: center;
+40|  padding: 40px 20px;
+41|  animation: fadeInDown 0.8s ease-out;
+42|}
+43|
+44|h1 {
+45|  font-size: 3.5rem;
+46|  margin-bottom: 10px;
+47|  background: linear-gradient(135deg, #fff 0%, #22c55e 100%);
+48|  -webkit-background-clip: text;
+49|  -webkit-text-fill-color: transparent;
+50|  background-clip: text;
+51|}
+52|
+53|.subtitle {
+54|  font-size: 1.3rem;
+55|  color: #86efac;
+56|  margin-bottom: 15px;
+57|  opacity: 0.9;
+58|}
+59|
+60|.datetime {
+61|  font-size: 1.1rem;
+62|  color: #cbd5e1;
+63|  margin-bottom: 30px;
+64|  opacity: 0.8;
+65|}
+66|
+67|/* Social Buttons */
+68|.social-buttons {
+69|  display: flex;
+70|  flex-wrap: wrap;
+71|  justify-content: center;
+72|  gap: 12px;
+73|  margin-top: 25px;
+74|}
+75|
+76|.btn-social {
+77|  padding: 12px 24px;
+78|  border-radius: 30px;
+79|  text-decoration: none;
+80|  font-weight: bold;
+81|  font-size: 0.95rem;
+82|  display: inline-flex;
+83|  align-items: center;
+84|  gap: 8px;
+85|  transition: all 0.3s ease;
+86|  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+87|  opacity: 0;
+88|  animation: slideIn 0.6s ease-out forwards;
+89|}
+90|
+91|.btn-social:hover {
+92|  transform: translateY(-3px) scale(1.05);
+93|  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+94|}
+95|
+96|.btn-whatsapp { background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); animation-delay: 0.1s; }
+97|.btn-instagram { background: linear-gradient(135deg, #E1306C 0%, #C13584 100%); animation-delay: 0.2s; }
+98|.btn-facebook { background: linear-gradient(135deg, #1877F2 0%, #0d5dbf 100%); animation-delay: 0.3s; }
+99|.btn-snapchat { background: linear-gradient(135deg, #FFFC00 0%, #FEE012 100%); color: #000; animation-delay: 0.4s; }
+100|.btn-twitter { background: linear-gradient(135deg, #1DA1F2 0%, #0c85d0 100%); animation-delay: 0.5s; }
+101|.btn-telegram { background: linear-gradient(135deg, #0088cc 0%, #006699 100%); animation-delay: 0.6s; }
+102|.btn-trade { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); animation-delay: 0.7s; }
+103|
+104|/* Section */
+105|.section {
+106|  margin: 40px 0;
+107|}
+108|
+109|.section-title {
+110|  text-align: center;
+111|  font-size: 2.2rem;
+112|  margin-bottom: 30px;
+113|  color: #fff;
+114|  text-shadow: 0 2px 10px rgba(34, 197, 94, 0.3);
+115|}
+116|
+117|/* Card Grid */
+118|.card-grid {
+119|  display: grid;
+120|  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+121|  gap: 25px;
+122|  margin-top: 20px;
+123|}
+124|
+125|.card-grid-2 {
+126|  display: grid;
+127|  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+128|  gap: 25px;
+129|  max-width: 900px;
+130|  margin: 0 auto;
+131|}
+132|
+133|/* Card Styles */
+134|.card {
+135|  background: rgba(255, 255, 255, 0.05);
+136|  backdrop-filter: blur(20px);
+137|  border: 1px solid rgba(255, 255, 255, 0.1);
+138|  border-radius: 20px;
+139|  padding: 30px;
+140|  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+141|  transition: all 0.4s ease;
+142|  animation: fadeInUp 0.6s ease-out;
+143|  position: relative;
+144|  overflow: hidden;
+145|}
+146|
+147|.card::before {
+148|  content: '';
+149|  position: absolute;
+150|  top: 0;
+151|  left: -100%;
+152|  width: 100%;
+153|  height: 100%;
+154|  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+155|  transition: left 0.6s;
+156|}
+157|
+158|.card:hover::before {
+159|  left: 100%;
+160|}
+161|
+162|.card:hover {
+163|  transform: translateY(-8px) scale(1.02);
+164|  box-shadow: 0 12px 48px rgba(34, 197, 94, 0.3);
+165|  border-color: rgba(34, 197, 94, 0.3);
+166|}
+167|
+168|/* Counter Card */
+169|.counter-card {
+170|  background: linear-gradient(135deg, rgba(34, 197, 94, 0.15) 0%, rgba(16, 185, 129, 0.15) 100%);
+171|  border: 2px solid rgba(34, 197, 94, 0.3);
+172|  text-align: center;
+173|  max-width: 600px;
+174|  margin: 0 auto;
+175|}
+176|
+177|.counter-icon {
+178|  font-size: 3rem;
+179|  margin-bottom: 15px;
+180|}
+181|
+182|.counter-title {
+183|  font-size: 1.5rem;
+184|  color: #86efac;
+185|  margin-bottom: 15px;
+186|}
+187|
+188|.counter-value {
+189|  font-size: 5rem;
+190|  font-weight: bold;
+191|  color: #22c55e;
+192|  text-shadow: 0 0 20px rgba(34, 197, 94, 0.5);
+193|  margin-bottom: 10px;
+194|  font-family: 'Courier New', monospace;
+195|}
+196|
+197|.counter-subtitle {
+198|  color: #cbd5e1;
+199|  font-size: 1.1rem;
+200|}
+201|
+202|/* Price Card */
+203|.price-card {
+204|  text-align: center;
+205|}
+206|
+207|.price-card-icon {
+208|  font-size: 2.5rem;
+209|  margin-bottom: 15px;
+210|}
+211|
+212|.price-card-title {
+213|  font-size: 1.5rem;
+214|  margin-bottom: 5px;
+215|  color: #fff;
+216|}
+217|
+218|.price-card-subtitle {
+219|  font-size: 0.9rem;
+220|  color: #94a3b8;
+221|  margin-bottom: 20px;
+222|}
+223|
+224|.price-value {
+225|  font-size: 2.5rem;
+226|  font-weight: bold;
+227|  margin-bottom: 15px;
+228|  font-family: 'Courier New', monospace;
+229|}
+230|
+231|.price-btc { color: #f59e0b; }
+232|.price-gold { color: #fbbf24; }
+233|
+234|.price-live {
+235|  display: inline-flex;
+236|  align-items: center;
+237|  gap: 8px;
+238|  color: #86efac;
+239|  font-size: 0.85rem;
+240|}
+241|
+242|.live-dot {
+243|  width: 8px;
+244|  height: 8px;
+245|  background: #22c55e;
+246|  border-radius: 50%;
+247|  animation: pulse 2s infinite;
+248|}
+249|
+250|/* Package Card */
+251|.package-card {
+252|  text-align: center;
+253|  background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
+254|  border: 1px solid rgba(139, 92, 246, 0.3);
+255|}
+256|
+257|.package-card.views-card {
+258|  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(37, 99, 235, 0.1) 100%);
+259|  border: 1px solid rgba(59, 130, 246, 0.3);
+260|}
+261|
+262|.package-icon {
+263|  font-size: 2rem;
+264|  margin-bottom: 10px;
+265|}
+266|
+267|.package-count {
+268|  font-size: 3rem;
+269|  font-weight: bold;
+270|  color: #a78bfa;
+271|  margin-bottom: 10px;
+272|}
+273|
+274|.views-card .package-count {
+275|  color: #60a5fa;
+276|}
+277|
+278|.package-price {
+279|  font-size: 1.8rem;
+280|  color: #fff;
+281|  margin-bottom: 20px;
+282|}
+283|
+284|.btn-order {
+285|  display: inline-flex;
+286|  align-items: center;
+287|  gap: 8px;
+288|  padding: 12px 30px;
+289|  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+290|  color: white;
+291|  text-decoration: none;
+292|  border-radius: 25px;
+293|  font-weight: bold;
+294|  transition: all 0.3s ease;
+295|  box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+296|}
+297|
+298|.btn-order:hover {
+299|  transform: scale(1.08);
+300|  box-shadow: 0 6px 25px rgba(34, 197, 94, 0.5);
+301|}
+302|
+303|/* Trade Card */
+304|.trade-card {
+305|  background: linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(217, 119, 6, 0.15) 100%);
+306|  border: 2px solid rgba(245, 158, 11, 0.4);
+307|  text-align: center;
+308|  max-width: 600px;
+309|  margin: 0 auto;
+310|}
+311|
+312|.trade-title {
+313|  font-size: 2rem;
+314|  margin-bottom: 15px;
+315|}
+316|
+317|.trade-price {
+318|  font-size: 3rem;
+319|  font-weight: bold;
+320|  color: #f59e0b;
+321|  margin-bottom: 25px;
+322|  font-family: 'Courier New', monospace;
+323|}
+324|
+325|.btn-trade {
+326|  display: inline-flex;
+327|  align-items: center;
+328|  gap: 10px;
+329|  padding: 15px 40px;
+330|  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+331|  color: white;
+332|  text-decoration: none;
+333|  border-radius: 30px;
+334|  font-weight: bold;
+335|  font-size: 1.1rem;
+336|  transition: all 0.3s ease;
+337|  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+338|}
+339|
+340|.btn-trade:hover {
+341|  transform: scale(1.1);
+342|  box-shadow: 0 8px 30px rgba(245, 158, 11, 0.6);
+343|}
+344|
+345|/* UPI Card */
+346|.upi-card {
+347|  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(139, 92, 246, 0.15) 100%);
+348|  border: 2px solid rgba(99, 102, 241, 0.4);
+349|  text-align: center;
+350|  max-width: 500px;
+351|  margin: 0 auto;
+352|}
+353|
+354|.upi-title {
+355|  font-size: 2rem;
+356|  margin-bottom: 25px;
+357|}
+358|
+359|.qr-container {
+360|  background: white;
+361|  padding: 20px;
+362|  border-radius: 15px;
+363|  display: inline-block;
+364|  margin-bottom: 25px;
+365|}
+366|
+367|.qr-container img {
+368|  width: 220px;
+369|  height: 220px;
+370|  display: block;
+371|}
+372|
+373|.upi-id-container {
+374|  background: rgba(0, 0, 0, 0.3);
+375|  padding: 15px;
+376|  border-radius: 12px;
+377|  margin-bottom: 15px;
+378|}
+379|
+380|.upi-label {
+381|  color: #94a3b8;
+382|  font-size: 0.9rem;
+383|  margin-bottom: 8px;
+384|}
+385|
+386|.upi-id {
+387|  font-size: 1.3rem;
+388|  font-family: 'Courier New', monospace;
+389|  color: #c4b5fd;
+390|  font-weight: bold;
+391|}
+392|
+393|.upi-hint {
+394|  color: #cbd5e1;
+395|  font-size: 0.95rem;
+396|}
+397|
+398|/* Footer */
+399|footer {
+400|  text-align: center;
+401|  padding: 30px;
+402|  margin-top: 60px;
+403|  color: #94a3b8;
+404|  border-top: 1px solid rgba(255, 255, 255, 0.1);
+405|}
+406|
+407|/* Animations */
+408|@keyframes fadeInDown {
+409|  from { opacity: 0; transform: translateY(-30px); }
+410|  to { opacity: 1; transform: translateY(0); }
+411|}
+412|
+413|@keyframes fadeInUp {
+414|  from { opacity: 0; transform: translateY(30px); }
+415|  to { opacity: 1; transform: translateY(0); }
+416|}
+417|
+418|@keyframes slideIn {
+419|  from { opacity: 0; transform: translateX(-20px); }
+420|  to { opacity: 1; transform: translateX(0); }
+421|}
+422|
+423|@keyframes pulse {
+424|  0%, 100% { opacity: 1; transform: scale(1); }
+425|  50% { opacity: 0.5; transform: scale(1.2); }
+426|}
+427|
+428|/* Responsive */
+429|@media (max-width: 768px) {
+430|  h1 { font-size: 2.5rem; }
+431|  .subtitle { font-size: 1rem; }
+432|  .datetime { font-size: 0.9rem; }
+433|  .section-title { font-size: 1.8rem; }
+434|  .counter-value { font-size: 3.5rem; }
+435|  .card-grid { grid-template-columns: 1fr; }
+436|  .card-grid-2 { grid-template-columns: 1fr; }
+437|  .btn-social { padding: 10px 18px; font-size: 0.85rem; }
+438|}
+439|
+440|@media (max-width: 480px) {
+441|  h1 { font-size: 2rem; }
+442|  .counter-value { font-size: 2.5rem; }
+443|  .trade-price { font-size: 2rem; }
+444|  .package-count { font-size: 2.5rem; }
+445|}
+446|</style>
+447|</head>
+448|<body>
+449|
+450|<!-- Particle Background Canvas -->
+451|<canvas id="particles"></canvas>
+452|
+453|<div class="container">
+454|  <!-- Header -->
+455|  <header>
+456|    <h1>Arman Qureshi</h1>
+457|    <div class="subtitle">Instagram Followers • Views • Crypto</div>
+458|    <div class="datetime" id="datetime"></div>
+459|    
+460|    <!-- Social Buttons -->
+461|    <div class="social-buttons">
+462|      <a href="https://wa.me/9026550240" class="btn-social btn-whatsapp">
+463|        <span>💬</span> WhatsApp
+464|      </a>
+465|      <a href="https://www.instagram.com/armanqureshi2800" target="_blank" class="btn-social btn-instagram">
+466|        <span>📸</span> Instagram
+467|      </a>
+468|      <a href="https://www.facebook.com/share/19pPMX9SMV/" target="_blank" class="btn-social btn-facebook">
+469|        <span>👤</span> Facebook
+470|      </a>
+471|      <a href="https://www.snapchat.com/add/armanqureshi_28" target="_blank" class="btn-social btn-snapchat">
+472|        <span>👻</span> Snapchat
+473|      </a>
+474|      <a href="https://twitter.com/ArmanQureshi280" target="_blank" class="btn-social btn-twitter">
+475|        <span>🐦</span> Twitter
+476|      </a>
+477|      <a href="https://t.me/Armanqureshi2800" target="_blank" class="btn-social btn-telegram">
+478|        <span>✈️</span> Telegram
+479|      </a>
+480|      <a href="https://www.deribit.com/futures/BTC-PERPETUAL" target="_blank" class="btn-social btn-trade">
+481|        <span>₿</span> Trade BTC
+482|      </a>
+483|    </div>
+484|  </header>
+485|
+486|  <!-- Followers Counter Section -->
+487|  <section class="section">
+488|    <div class="card counter-card">
+489|      <div class="counter-icon">👥</div>
+490|      <div class="counter-title">Followers Delivered</div>
+491|      <div class="counter-value" id="followerCounter">0</div>
+492|      <div class="counter-subtitle">और बढ़ रहे हैं...</div>
+493|    </div>
+494|  </section>
+495|
+496|  <!-- Live Market Prices -->
+497|  <section class="section">
+498|    <h2 class="section-title">Live Market Prices</h2>
+499|    <div class="card-grid-2">
+500|      <!-- Bitcoin Card -->
+501|      <div class="card price-card">
+502|        <div class="price-card-icon">₿</div>
+503|        <div class="price-card-title">Bitcoin</div>
+504|        <div class="price-card-subtitle">Live Price</div>
+505|        <div class="price-value price-btc" id="btcPrice">Loading...</div>
+506|        <div class="price-live">
+507|          <span class="live-dot"></span>
+508|          Updates every 60s
+509|        </div>
+510|      </div>
+511|
+512|      <!-- Gold Card -->
+513|      <div class="card price-card">
+514|        <div class="price-card-icon">🏆</div>
+515|        <div class="price-card-title">Gold 24 Carat</div>
+516|        <div class="price-card-subtitle">Lucknow</div>
+517|        <div class="price-value price-gold" id="goldPrice">₹72,580/10g</div>
+518|        <div class="price-live">
+519|          <span class="live-dot"></span>
+520|          Updates every 60s
+521|        </div>
+522|      </div>
+523|    </div>
+524|  </section>
+525|
+526|  <!-- Instagram Followers Packages -->
+527|  <section class="section">
+528|    <h2 class="section-title">👥 Instagram Followers Packages</h2>
+529|    <div class="card-grid">
+530|      <div class="card package-card">
+531|        <div class="package-icon">👤</div>
+532|        <div class="package-count">1K</div>
+533|        <div class="package-price">₹99</div>
+534|        <a href="https://wa.me/9026550240?text=नमस्ते! मुझे 1K Instagram Followers चाहिए।" class="btn-order">
+535|          <span>💬</span> Order Now
+536|        </a>
+537|      </div>
+538|
+539|      <div class="card package-card">
+540|        <div class="package-icon">👥</div>
+541|        <div class="package-count">5K</div>
+542|        <div class="package-price">₹399</div>
+543|        <a href="https://wa.me/9026550240?text=नमस्ते! मुझे 5K Instagram Followers चाहिए।" class="btn-order">
+544|          <span>💬</span> Order Now
+545|        </a>
+546|      </div>
+547|
+548|      <div class="card package-card">
+549|        <div class="package-icon">👨‍👩‍👧‍👦</div>
+550|        <div class="package-count">10K</div>
+551|        <div class="package-price">₹699</div>
+552|        <a href="https://wa.me/9026550240?text=नमस्ते! मुझे 10K Instagram Followers चाहिए।" class="btn-order">
+553|          <span>💬</span> Order Now
+554|        </a>
+555|      </div>
+556|    </div>
+557|  </section>
+558|
+559|  <!-- Instagram Views Packages -->
+560|  <section class="section">
+561|    <h2 class="section-title">👁️ Instagram Views Packages</h2>
+562|    <div class="card-grid">
+563|      <div class="card package-card views-card">
+564|        <div class="package-icon">👁️</div>
+565|        <div class="package-count">5K</div>
+566|        <div class="package-price">₹299</div>
+567|        <a href="https://wa.me/9026550240?text=नमस्ते! मुझे 5K Instagram Views चाहिए।" class="btn-order">
+568|          <span>💬</span> Order Now
+569|        </a>
+570|      </div>
+571|
+572|      <div class="card package-card views-card">
+573|        <div class="package-icon">👁️</div>
+574|        <div class="package-count">10K</div>
+575|        <div class="package-price">₹499</div>
+576|        <a href="https://wa.me/9026550240?text=नमस्ते! मुझे 10K Instagram Views चाहिए।" class="btn-order">
+577|          <span>💬</span> Order Now
+578|        </a>
+579|      </div>
+580|
+581|      <div class="card package-card views-card">
+582|        <div class="package-icon">👁️</div>
+583|        <div class="package-count">20K</div>
+584|        <div class="package-price">₹899</div>
+585|        <a href="https://wa.me/9026550240?text=नमस्ते! मुझे 20K Instagram Views चाहिए।" class="btn-order">
+586|          <span>💬</span> Order Now
+587|        </a>
+588|      </div>
+589|    </div>
+590|  </section>
+591|
+592|  <!-- Trade Bitcoin Section -->
+593|  <section class="section">
+594|    <h2 class="section-title">Trade Bitcoin</h2>
+595|    <div class="card trade-card">
+596|      <div class="trade-title">₿ Bitcoin Live</div>
+597|      <div class="trade-price" id="btcTrade">Loading...</div>
+598|      <a href="https://www.deribit.com/futures/BTC-PERPETUAL" target="_blank" class="btn-trade">
+599|        <span>₿</span> Trade Now
+600|      </a>
+601|    </div>
+602|  </section>
+603|
+604|  <!-- UPI Payment Section -->
+605|  <section class="section">
+606|    <h2 class="section-title">UPI Payment</h2>
+607|    <div class="card upi-card">
+608|      <div class="upi-title">Scan to Pay</div>
+609|      <div class="qr-container">
+610|        <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=upi://pay?pa=k4046280-2@OKXIS&pn=Arman%20Qureshi&cu=INR" alt="UPI QR Code">
+611|      </div>
+612|      <div class="upi-id-container">
+613|        <div class="upi-label">UPI ID:</div>
+614|        <div class="upi-id">k4046280-2@OKXIS</div>
+615|      </div>
+616|      <div class="upi-hint">किसी भी UPI app से स्कैन करें</div>
+617|    </div>
+618|  </section>
+619|
+620|  <!-- Footer -->
+621|  <footer>
+622|    <p>© 2024 Arman Qureshi. All rights reserved.</p>
+623|  </footer>
+624|</div>
+625|
+626|<script>
+627|// ==================== PARTICLE BACKGROUND ====================
+628|const canvas = document.getElementById('particles');
+629|const ctx = canvas.getContext('2d');
+630|
+631|function resizeCanvas() {
+632|  canvas.width = window.innerWidth;
+633|  canvas.height = document.body.scrollHeight;
+634|}
+635|resizeCanvas();
+636|window.addEventListener('resize', resizeCanvas);
+637|
+638|const particles = [];
+639|const particleCount = 150;
+640|
+641|class Particle {
+642|  constructor() {
+643|    this.x = Math.random() * canvas.width;
+644|    this.y = Math.random() * canvas.height;
+645|    this.size = Math.random() * 3 + 1;
+646|    this.speedX = Math.random() * 1 - 0.5;
+647|    this.speedY = Math.random() * 1 - 0.5;
+648|    this.opacity = Math.random() * 0.5 + 0.3;
+649|  }
+650|
+651|  update() {
+652|    this.x += this.speedX;
+653|    this.y += this.speedY;
+654|
+655|    if (this.x > canvas.width) this.x = 0;
+656|    if (this.x < 0) this.x = canvas.width;
+657|    if (this.y > canvas.height) this.y = 0;
+658|    if (this.y < 0) this.y = canvas.height;
+659|  }
+660|
+661|  draw() {
+662|    ctx.fillStyle = `rgba(34, 197, 94, ${this.opacity})`;
+663|    ctx.beginPath();
+664|    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+665|    ctx.fill();
+666|  }
+667|}
+668|
+669|for (let i = 0; i < particleCount; i++) {
+670|  particles.push(new Particle());
+671|}
+672|
+673|function animateParticles() {
+674|  ctx.clearRect(0, 0, canvas.width, canvas.height);
+675|  
+676|  particles.forEach(particle => {
+677|    particle.update();
+678|    particle.draw();
+679|  });
+680|
+681|  // Draw connections
+682|  particles.forEach((a, i) => {
+683|    particles.slice(i + 1).forEach(b => {
+684|      const dx = a.x - b.x;
+685|      const dy = a.y - b.y;
+686|      const distance = Math.sqrt(dx * dx + dy * dy);
+687|
+688|      if (distance < 120) {
+689|        ctx.strokeStyle = `rgba(34, 197, 94, ${0.15 * (1 - distance / 120)})`;
+690|        ctx.lineWidth = 0.5;
+691|        ctx.beginPath();
+692|        ctx.moveTo(a.x, a.y);
+693|        ctx.lineTo(b.x, b.y);
+694|        ctx.stroke();
+695|      }
+696|    });
+697|  });
+698|
+699|  requestAnimationFrame(animateParticles);
+700|}
+701|
+702|animateParticles();
+703|
+704|// ==================== DATE & TIME ====================
+705|function updateDateTime() {
+706|  const now = new Date();
+707|  const options = { 
+708|    weekday: 'long', 
+709|    year: 'numeric', 
+710|    month: 'long', 
+711|    day: 'numeric',
+712|    hour: '2-digit',
+713|    minute: '2-digit'
+714|  };
+715|  document.getElementById('datetime').textContent = now.toLocaleDateString('hi-IN', options);
+716|}
+717|
+718|updateDateTime();
+719|setInterval(updateDateTime, 60000); // Update every minute
+720|
+721|// ==================== FOLLOWERS COUNTER ====================
+722|let followerCount = 0;
+723|const targetCount = 1000000;
+724|const counterElement = document.getElementById('followerCounter');
+725|
+726|function formatNumber(num) {
+727|  if (num >= 1000000) {
+728|    return (num / 1000000).toFixed(1) + 'M+';
+729|  } else if (num >= 1000) {
+730|    return (num / 1000).toFixed(0) + 'K';
+731|  }
+732|  return num;
+733|}
+734|
+735|const counterInterval = setInterval(() => {
+736|  followerCount += 10000;
+737|  if (followerCount >= targetCount) {
+738|    followerCount = targetCount;
+739|    counterElement.textContent = '1.0M+';
+740|    clearInterval(counterInterval);
+741|  } else {
+742|    counterElement.textContent = formatNumber(followerCount);
+743|  }
+744|}, 30);
+745|
+746|// ==================== BITCOIN PRICE ====================
+747|async function updateBitcoinPrice() {
+748|  try {
+749|    const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=inr');
+750|    const data = await response.json();
+751|    const price = data.bitcoin.inr;
+752|    const formattedPrice = '₹' + price.toLocaleString('en-IN');
+753|    
+754|    document.getElementById('btcPrice').textContent = formattedPrice;
+755|    document.getElementById('btcTrade').textContent = formattedPrice;
+756|  } catch (error) {
+757|    console.error('Bitcoin price fetch error:', error);
+758|    document.getElementById('btcPrice').textContent = 'Error loading';
+759|    document.getElementById('btcTrade').textContent = 'Error loading';
+760|  }
+761|}
+762|
+763|updateBitcoinPrice();
+764|setInterval(updateBitcoinPrice, 60000); // Update every 60 seconds
+765|
+766|// ==================== GOLD PRICE (Mock - needs real API) ====================
+767|// Using mock data for now
+768|function updateGoldPrice() {
+769|  // Mock gold price - in production, replace with real API
+770|  const mockPrice = 72580 + Math.floor(Math.random() * 200 - 100);
+771|  document.getElementById('goldPrice').textContent = '₹' + mockPrice.toLocaleString('en-IN') + '/10g';
+772|}
+773|
+774|updateGoldPrice();
+775|setInterval(updateGoldPrice, 60000); // Update every 60 seconds
+776|
+777|// ==================== SCROLL ANIMATION ====================
+778|window.addEventListener('scroll', () => {
+779|  resizeCanvas(); // Update canvas height on scroll
+780|});
+781|</script>
+782|
+783|</body>
+784|</html>
+785|
+[End of file]
