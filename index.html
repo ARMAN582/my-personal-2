@@ -20,7 +20,6 @@ h1 { font-size:48px; margin:0; }
 .snapchat {background:#FFFC00;color:#000;}
 .twitter {background:#1DA1F2;color:#fff;}
 .telegram {background:#0088cc;color:#fff;}
-.trade {background:#FFD700;color:#000;}
 
 /* Cards */
 .section { padding:30px 20px; text-align:center; }
@@ -59,20 +58,47 @@ footer { font-size:14px; opacity:0.6; margin:20px 0; }
     <a class="btn snapchat" href="https://www.snapchat.com/add/armanqureshi_28">Snapchat</a>
     <a class="btn twitter" href="https://twitter.com/ArmanQureshi280">Twitter</a>
     <a class="btn telegram" href="https://t.me/Armanqureshi2800">Telegram</a>
-    <a class="btn trade" href="https://www.deribit.com/futures/BTC-PERPETUAL" target="_blank">Trade BTC</a>
   </div>
 </header>
 
-<section class="section"><h2>Live Stats</h2>
+<section class="section"><h2>Live Stats & Packages</h2>
   <div class="cards">
-    <div class="card"><h3>Followers Delivered</h3><div class="value" id="followersCounter">0</div></div>
-    <div class="card"><h3>Views Delivered</h3><div class="value" id="viewsCounter">0</div></div>
-    <div class="card"><h3>Bitcoin Price (INR)</h3><div class="value" id="btcPrice">Loading…</div></div>
-    <div class="card"><h3>Gold 24K Spot (INR)</h3><div class="value" id="goldPrice">Loading…</div></div>
+    <!-- Gold Price Card -->
     <div class="card">
-      <h3>Trade BTC</h3>
-      <div class="value" id="tradeBtcPrice">Loading…</div>
-      <a class="order trade" href="https://www.deribit.com/futures/BTC-PERPETUAL" target="_blank">Trade</a>
+      <h3>Gold 24K Spot (INR)</h3>
+      <div class="value" id="goldPrice">Loading…</div>
+    </div>
+
+    <!-- Bitcoin Price Card -->
+    <div class="card">
+      <h3>Bitcoin Price (INR)</h3>
+      <div class="value" id="btcPrice">Loading…</div>
+    </div>
+
+    <!-- Followers Delivered Card -->
+    <div class="card">
+      <h3>Followers Delivered</h3>
+      <div class="value" id="followersCounter">0</div>
+    </div>
+
+    <!-- Views Delivered Card -->
+    <div class="card">
+      <h3>Views Delivered</h3>
+      <div class="value" id="viewsCounter">0</div>
+    </div>
+
+    <!-- Website Package Card -->
+    <div class="card">
+      <h3>1 Website</h3>
+      <div class="value">₹3000</div>
+      <a class="order" href="https://wa.me/9026550240?text=I want 1 website package">Order</a>
+    </div>
+
+    <!-- App Package Card -->
+    <div class="card">
+      <h3>1 App</h3>
+      <div class="value">₹1500</div>
+      <a class="order" href="https://wa.me/9026550240?text=I want 1 app package">Order</a>
     </div>
   </div>
 </section>
@@ -127,7 +153,6 @@ async function fetchBTC(){
     const d=await res.json();
     const p = d.bitcoin.inr;
     document.getElementById('btcPrice').innerText = '₹'+p.toLocaleString();
-    document.getElementById('tradeBtcPrice').innerText = '₹'+p.toLocaleString();
   } catch { document.getElementById('btcPrice').innerText='Error'; }
 }
 fetchBTC(); setInterval(fetchBTC, 60000);
