@@ -9,17 +9,13 @@
 body, html {
   margin:0; padding:0;
   font-family:Arial, Helvetica, sans-serif;
-  background: linear-gradient(135deg,#000,#111,#000);
-  color:white;
-  text-align:center;
+  background:#000; color:white; text-align:center;
   overflow-x:hidden;
 }
+canvas{position:fixed; top:0; left:0; z-index:-1;}
 header{
-  padding:50px;
-  position:relative;
-  overflow:hidden;
-  height:100vh;
-  background: radial-gradient(circle at center, #111 0%, #000 100%);
+  padding:50px; height:100vh; position:relative;
+  overflow:hidden; backdrop-filter:blur(2px);
 }
 h1{font-size:48px;margin-bottom:10px;animation:slideDown 1s;}
 .subtitle{opacity:0.8;margin-bottom:20px;animation:fadeIn 2s;}
@@ -27,9 +23,9 @@ h1{font-size:48px;margin-bottom:10px;animation:slideDown 1s;}
 .cards{display:flex;flex-wrap:wrap;justify-content:center;}
 .card{
   background:rgba(255,255,255,0.05);
-  backdrop-filter:blur(10px);
+  backdrop-filter:blur(15px);
   padding:25px;margin:15px;border-radius:12px;width:230px;
-  box-shadow:0 0 15px rgba(0,0,0,0.4);
+  box-shadow:0 0 25px rgba(0,255,0,0.4);
   transition:transform 0.4s;
 }
 .card:hover{transform:scale(1.08);}
@@ -41,7 +37,7 @@ form{margin-top:25px;}
 input,select{padding:10px;margin:6px;border-radius:8px;border:none;width:220px;}
 button{padding:10px 20px;border:none;border-radius:20px;background:#25D366;color:white;cursor:pointer;transition:transform 0.3s;}
 button:hover{transform:scale(1.05);}
-.review{background:#111;padding:20px;margin:10px;border-radius:10px;max-width:500px;margin:auto;animation:fadeInUp 1s;}
+.review{background:rgba(0,0,0,0.4);padding:20px;margin:10px;border-radius:10px;max-width:500px;margin:auto;animation:fadeInUp 1s;}
 .faq{max-width:600px;margin:auto;text-align:left;}
 footer{opacity:0.6;padding:20px;margin-top:30px;}
 .qr{margin-top:20px;}
@@ -50,16 +46,14 @@ footer{opacity:0.6;padding:20px;margin-top:30px;}
 .btn{padding:12px 24px;border-radius:30px;margin:6px;text-decoration:none;font-weight:bold;display:inline-block;position:relative;transition:transform 0.3s;}
 .btn:hover{transform:rotate(5deg) scale(1.1);}
 .btn::after{
-  content:"🟊";position:absolute;top:-10px;right:-10px;font-size:16px;opacity:0;transition:opacity 0.3s;
+  content:"💫";position:absolute;top:-10px;right:-10px;font-size:16px;opacity:0;transition:opacity 0.3s;
 }
 .btn:hover::after{opacity:1;}
-
 .whatsapp{background:#25D366;color:white;animation:btn1 1s;}
 .instagram{background:#E1306C;color:white;animation:btn2 1s;}
 .facebook{background:#1877F2;color:white;animation:btn3 1s;}
 .snapchat{background:#FFFC00;color:black;animation:btn4 1s;}
 .twitter{background:#1DA1F2;color:white;animation:btn5 1s;}
-.youtube{display:none;}
 .telegram{background:#0088cc;color:white;animation:btn7 1s;}
 .trade{background:#FFD700;color:black;animation:btn8 1s;}
 
@@ -78,6 +72,8 @@ footer{opacity:0.6;padding:20px;margin-top:30px;}
 </style>
 </head>
 <body>
+
+<canvas id="bg"></canvas>
 
 <header>
 <h1>Arman Qureshi</h1>
@@ -168,11 +164,11 @@ footer{opacity:0.6;padding:20px;margin-top:30px;}
 <footer>© 2026 Arman Qureshi</footer>
 
 <script>
-// Counter
+// ===== Counter =====
 let counter=0,target=75000,el=document.getElementById("counter");
 let interval=setInterval(()=>{counter+=350;el.innerText=counter+"+";if(counter>=target)clearInterval(interval);},40);
 
-// Order WhatsApp
+// ===== Order WhatsApp =====
 function sendOrder(){
 let username=document.getElementById("user").value;
 let pack=document.getElementById("pack").value;
@@ -180,14 +176,38 @@ let msg=`Hello Arman I want ${pack} for Instagram ${username}`;
 window.open("https://wa.me/9026550240?text="+encodeURIComponent(msg));
 }
 
-// Date & Day
+// ===== Date & Day =====
 function updateDateDay(){
 let now=new Date();
 let options={weekday:'long',year:'numeric',month:'long',day:'numeric'};
 document.getElementById("dateDay").innerText=now.toLocaleDateString('en-US',options);
 }
 updateDateDay();
-setInterval(updateDateDay,60000); // refresh every 1 min
+setInterval(updateDateDay,60000);
+
+// ===== Particle Background =====
+const canvas=document.getElementById('bg');
+const ctx=canvas.getContext('2d');
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+let particles=[];
+for(let i=0;i<120;i++){
+particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*3+1,speed:Math.random()*0.5+0.2});
+}
+function animate(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+particles.forEach(p=>{
+p.y-=p.speed;
+if(p.y<0)p.y=canvas.height;
+ctx.beginPath();
+ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+ctx.fillStyle='rgba(0,255,0,0.7)';
+ctx.fill();
+});
+requestAnimationFrame(animate);
+}
+animate();
+window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight;});
 </script>
 
 </body>
