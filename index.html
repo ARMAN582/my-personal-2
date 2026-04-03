@@ -3,15 +3,35 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Arman Qureshi | Social Growth</title>
+<title>Arman Qureshi | Social Growth & Crypto</title>
 <style>
-body, html {margin:0;padding:0;font-family:Arial, Helvetica, sans-serif;background: linear-gradient(135deg,#000,#111,#000);color:white;text-align:center;scroll-behavior:smooth;}
-header{padding:50px;background:#111;position:relative;overflow:hidden;}
+/* ===== Reset & Body ===== */
+body, html {
+  margin:0; padding:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background: linear-gradient(135deg,#000,#111,#000);
+  color:white;
+  text-align:center;
+  overflow-x:hidden;
+}
+header{
+  padding:50px;
+  position:relative;
+  overflow:hidden;
+  height:100vh;
+  background: radial-gradient(circle at center, #111 0%, #000 100%);
+}
 h1{font-size:48px;margin-bottom:10px;animation:slideDown 1s;}
 .subtitle{opacity:0.8;margin-bottom:20px;animation:fadeIn 2s;}
 .section{padding:50px 20px;}
 .cards{display:flex;flex-wrap:wrap;justify-content:center;}
-.card{background:rgba(255,255,255,0.05);backdrop-filter:blur(10px);padding:25px;margin:15px;border-radius:12px;width:230px;box-shadow:0 0 15px rgba(0,0,0,0.4);transition:transform 0.4s;}
+.card{
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(10px);
+  padding:25px;margin:15px;border-radius:12px;width:230px;
+  box-shadow:0 0 15px rgba(0,0,0,0.4);
+  transition:transform 0.4s;
+}
 .card:hover{transform:scale(1.08);}
 .price{font-size:30px;color:#25D366;margin:10px 0;}
 .order{background:#25D366;color:white;padding:10px 20px;border-radius:20px;text-decoration:none;display:inline-block;margin-top:10px;transition:transform 0.3s;}
@@ -21,19 +41,29 @@ form{margin-top:25px;}
 input,select{padding:10px;margin:6px;border-radius:8px;border:none;width:220px;}
 button{padding:10px 20px;border:none;border-radius:20px;background:#25D366;color:white;cursor:pointer;transition:transform 0.3s;}
 button:hover{transform:scale(1.05);}
-.review{background:#111;padding:20px;margin:10px;border-radius:10px;max-width:500px;margin-left:auto;margin-right:auto;animation:fadeInUp 1s;}
+.review{background:#111;padding:20px;margin:10px;border-radius:10px;max-width:500px;margin:auto;animation:fadeInUp 1s;}
 .faq{max-width:600px;margin:auto;text-align:left;}
 footer{opacity:0.6;padding:20px;margin-top:30px;}
 .qr{margin-top:20px;}
-.btn{padding:12px 24px;border-radius:30px;margin:6px;text-decoration:none;font-weight:bold;display:inline-block;transition:transform 0.3s;}
+
+/* ===== Buttons & Animations ===== */
+.btn{padding:12px 24px;border-radius:30px;margin:6px;text-decoration:none;font-weight:bold;display:inline-block;position:relative;transition:transform 0.3s;}
 .btn:hover{transform:rotate(5deg) scale(1.1);}
+.btn::after{
+  content:"🟊";position:absolute;top:-10px;right:-10px;font-size:16px;opacity:0;transition:opacity 0.3s;
+}
+.btn:hover::after{opacity:1;}
+
 .whatsapp{background:#25D366;color:white;animation:btn1 1s;}
 .instagram{background:#E1306C;color:white;animation:btn2 1s;}
 .facebook{background:#1877F2;color:white;animation:btn3 1s;}
 .snapchat{background:#FFFC00;color:black;animation:btn4 1s;}
 .twitter{background:#1DA1F2;color:white;animation:btn5 1s;}
-.youtube{background:#FF0000;color:white;animation:btn6 1s;}
+.youtube{display:none;}
 .telegram{background:#0088cc;color:white;animation:btn7 1s;}
+.trade{background:#FFD700;color:black;animation:btn8 1s;}
+
+/* ===== Animations ===== */
 @keyframes slideDown{from{transform:translateY(-50px);opacity:0;}to{transform:translateY(0);opacity:1;}}
 @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
 @keyframes fadeInUp{from{transform:translateY(50px);opacity:0;}to{transform:translateY(0);opacity:1;}}
@@ -42,15 +72,17 @@ footer{opacity:0.6;padding:20px;margin-top:30px;}
 @keyframes btn3{0%{transform:translateX(50px);}100%{transform:translateX(0);}}
 @keyframes btn4{0%{transform:translateY(-50px);}100%{transform:translateY(0);}}
 @keyframes btn5{0%{transform:translateY(50px);}100%{transform:translateY(0);}}
-@keyframes btn6{0%{opacity:0;transform:scale(0.5);}100%{opacity:1;transform:scale(1);}}
 @keyframes btn7{0%{opacity:0;transform:rotate(-180deg);}100%{opacity:1;transform:rotate(0deg);}}
+@keyframes btn8{0%{opacity:0;transform:scale(0);}100%{opacity:1;transform:scale(1);}}
+.date-day{font-size:18px;margin-top:10px;opacity:0.7;}
 </style>
 </head>
 <body>
 
 <header>
 <h1>Arman Qureshi</h1>
-<div class="subtitle">Instagram Followers • Social Media Growth</div>
+<div class="subtitle">Instagram Followers • Social Media & Crypto</div>
+<div class="date-day" id="dateDay"></div>
 
 <!-- Social Buttons -->
 <a class="btn whatsapp" href="https://wa.me/9026550240">WhatsApp</a>
@@ -58,8 +90,8 @@ footer{opacity:0.6;padding:20px;margin-top:30px;}
 <a class="btn facebook" href="https://www.facebook.com/share/19pPMX9SMV/">Facebook</a>
 <a class="btn snapchat" href="https://www.snapchat.com/add/armanqureshi_28">Snapchat</a>
 <a class="btn twitter" href="https://twitter.com/ArmanQureshi280">Twitter</a>
-<a class="btn youtube" href="https://www.youtube.com/channel/UCOyRiMeC7mCY0okyccR409w">YouTube</a>
 <a class="btn telegram" href="https://t.me/Armanqureshi2800">Telegram</a>
+<a class="btn trade" href="https://www.deribit.com/futures/BTC-PERPETUAL" target="_blank">Trade BTC</a>
 </header>
 
 <section class="section">
@@ -115,8 +147,8 @@ footer{opacity:0.6;padding:20px;margin-top:30px;}
 </section>
 
 <section class="section">
-<h2>Watch My YouTube Channel</h2>
-<iframe width="360" height="215" src="https://www.youtube.com/embed/UCOyRiMeC7mCY0okyccR409w" title="YouTube video" frameborder="0" allowfullscreen style="border-radius:12px;"></iframe>
+<h2>Today's Bitcoin Price</h2>
+<p style="color:#FFD700;">Check live price: <a href="https://www.google.com/search?q=bitcoin+price+today" target="_blank" style="color:#FFD700;">Click Here</a></p>
 </section>
 
 <section class="section">
@@ -136,14 +168,27 @@ footer{opacity:0.6;padding:20px;margin-top:30px;}
 <footer>© 2026 Arman Qureshi</footer>
 
 <script>
-let counter=0,target=100000,el=document.getElementById("counter");
+// Counter
+let counter=0,target=75000,el=document.getElementById("counter");
 let interval=setInterval(()=>{counter+=350;el.innerText=counter+"+";if(counter>=target)clearInterval(interval);},40);
+
+// Order WhatsApp
 function sendOrder(){
 let username=document.getElementById("user").value;
 let pack=document.getElementById("pack").value;
 let msg=`Hello Arman I want ${pack} for Instagram ${username}`;
 window.open("https://wa.me/9026550240?text="+encodeURIComponent(msg));
 }
+
+// Date & Day
+function updateDateDay(){
+let now=new Date();
+let options={weekday:'long',year:'numeric',month:'long',day:'numeric'};
+document.getElementById("dateDay").innerText=now.toLocaleDateString('en-US',options);
+}
+updateDateDay();
+setInterval(updateDateDay,60000); // refresh every 1 min
 </script>
+
 </body>
 </html>
