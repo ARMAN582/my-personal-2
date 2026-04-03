@@ -130,7 +130,7 @@ function updateCounters(){
   if(f < 1000000) f += Math.floor(Math.random()*5000);
   if(v < 1000000) v += Math.floor(Math.random()*5000);
   document.getElementById("followersCounter").innerText = f>=1000000 ? "1M+" : (f/1000).toFixed(0)+"K+";
-  document.getElementById("viewsCounter").innerText = v>=1000000 ? "1M+" : (v/1000).toFixed(0)+"K+";
+  document.getElementById("viewsCounter").innerText = v>=10000000 ? "1M+" : (v/1000).toFixed(0)+"K+";
 }
 setInterval(updateCounters, 50);
 
